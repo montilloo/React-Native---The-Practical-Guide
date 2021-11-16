@@ -7,14 +7,14 @@ export default function App() {
 	const [courseGoals, setCourseGoals] = useState([]);
 
 	const addGoalHandler = enteredGoal => {
-		setCourseGoals(currentGoals => [{key: Math.random().toString(), value: enteredGoal}, ...currentGoals]);
+		setCourseGoals(currentGoals => [{id: Math.random().toString(), value: enteredGoal}, ...currentGoals]);
 	}
 
 	return (
 		<View style={styles.screen}>
 			<GoalInput onAddGoal={addGoalHandler}/>
-			<FlatList data={courseGoals} renderItem={itemData => (
-				<GoalItem title={itemData.item.value}/>
+			<FlatList data={courseGoals} keyExtractor={(item) => item.id} renderItem={itemData => (
+				<GoalItem title={itemData.item.value} onDelete={() => console.log('Does that work?')}/>
 			)}>
 			</FlatList>
 		</View>
